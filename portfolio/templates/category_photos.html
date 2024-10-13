@@ -1,0 +1,16 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<main>
+    <h2>Category Photos</h2>
+    <div class="gallery">
+        {% for photo in photos %}
+            <div class="photo-card">
+                <img src="{{ photo.image.url }}" alt="{{ photo.title }}">
+                <h2>{{ photo.title }}</h2>
+                <p>{{ photo.description }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

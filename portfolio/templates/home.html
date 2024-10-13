@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}  <!-- Load static files -->
+    <link rel="stylesheet" href="{% static 'portfolio/style.css' %}">  <!-- Ensure the correct path -->
+    <title>Photography Portfolio</title>
+</head>
+<body>
+    <header>
+        <h1>My Photography Portfolio</h1>
+        <nav>
+            <ul>
+                {% for category in categories %}
+                    <li><a href="{% url 'category_photos' category.id %}">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="gallery">
+            {% for photo in photos %}
+                <div class="photo-card">
+                    <img src="{{ photo.image.url }}" alt="{{ photo.title }}">
+                    <h2>{{ photo.title }}</h2>
+                    <p>{{ photo.description }}</p>
+                </div>
+            {% empty %}
+                <p>No photos available.</p>  <!-- Add an empty case for better user experience -->
+            {% endfor %}
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; Lensque {{year}} </p>
+    </footer>
+</body>
+</html>
